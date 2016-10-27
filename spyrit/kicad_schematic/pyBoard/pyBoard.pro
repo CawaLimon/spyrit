@@ -1,4 +1,4 @@
-update=10/26/2016 1:20:48 PM
+update=10/26/2016 8:57:37 PM
 version=1
 last_client=kicad
 [pcbnew]
@@ -60,3 +60,4 @@ LibName28=atmel
 LibName29=contrib
 LibName30=valves
 LibName31=Oscillators
+LibName32=C:/Users/Derek Yu/Documents/FIRECODE/spyrit/kicad_schematic/spirit1
