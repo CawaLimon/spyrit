@@ -83,6 +83,7 @@ class RegisterField:
     def __init__(self, name, bitRange, parent):
         self.parent = parent
         self.name = QtGui.QStandardItem(name)
+        self.name.setEditable(False)
         self.mask = 0
         if type(bitRange) == list:
             count = bitRange[0]

@@ -14,6 +14,88 @@ from spirit1 import spirit_status
 
 ICON_PATH = "./assets/logosmall.png"
 
+class AES(QtGui.QWidget):
+    def __init__(self, serial, parent=None):
+        super(AES, self).__init__(parent)
+        self.serial = serial 
+        
+        #LineEdits
+        self.encryptKey = QtGui.QLineEdit()
+        self.encryptKey.setPlaceholderText("jambles")
+        
+        self.decryptKey = QtGui.QLineEdit()
+        self.decryptKey.setPlaceholderText("jimbles")
+        
+        self.input = QtGui.QLineEdit()
+        self.input.setPlaceholderText("Encrypt Me")
+        
+        self.output = QtGui.QLineEdit()
+        self.output.setPlaceholderText("Decrypted")
+        self.output.setReadOnly(False)
+        
+        #Buttons
+        self.encryptButton = QtGui.QPushButton("Encrypt")
+        self.encryptButton.clicked.connect(self.encrypt)
+        
+        self.decryptButton = QtGui.QPushButton("Decrypt")
+        self.decryptButton.clicked.connect(self.decrypt)
+        
+        self.computeKeyButton = QtGui.QPushButton('Compute Key')
+        self.computeKeyButton.clicked.connect(self.aesKey)
+        
+        self.computeDecKeyButton = QtGui.QPushButton('Compute Dec Key')
+        self.computeDecKeyButton.clicked.connect(self.aesDecKey)
+        
+        #layouts
+        layout = QtGui.QVBoxLayout(self)
+        lineeditlayout = QtGui.QFormLayout()
+        lineeditlayout.addRow("Encryption Key:", self.encryptKey)
+        lineeditlayout.addRow("Decryption Key:", self.decryptKey)
+        lineeditlayout.addRow("Input:", self.input)
+        lineeditlayout.addRow("Output:", self.output)
+        
+        buttonlayout = QtGui.QGridLayout()
+        buttonlayout.addWidget(self.encryptButton, 0, 0)
+        buttonlayout.addWidget(self.decryptButton, 0, 1)
+        buttonlayout.addWidget(self.computeKeyButton, 1, 0)
+        buttonlayout.addWidget(self.computeDecKeyButton, 1, 1)
+        
+        layout.addLayout(lineeditlayout)
+        layout.addLayout(buttonlayout)
+        layout.addStretch(1)
+        
+    def encrypt(self):
+#         self.serial.writeRegister() write input into aes in regs
+        self.serial.sendCommand(0x6A)
+        
+#         result = self.serial.readRegister() figure out length in datasheet
+        result = ""
+        self.output.setText(result)
+        
+    def decrypt(self):
+#         self.serial.writeRegisters() write input into aes in regs
+        self.serial.sendCommand(0x6C)
+        
+#         result = self.serial.readRegisters() read aes out registers
+        result = ""
+        self.output.setText(result)
+        
+    def aesKey(self):
+#         self.serial.writeRegisters() write dec key into aes in
+        self.serial.sendCommand(0x6B)
+        
+#         result = self.serial.readRegisters() read aes out registers
+        result = ""
+        self.output.setText(result)
+        
+    def aesDecKey(self):
+#         self.serial.writeRegisters() write enc key into aes in regs
+        self.serial.sendCommand(0x6D)
+        
+#         result = self.serial.readRegisters() read aes out registers
+        result = ""
+        self.output.setText(result)
+
 class SerialConnect(QtGui.QWidget):
     def __init__(self, notifyFunc=None, parent=None):
         super(SerialConnect, self).__init__(parent)
@@ -272,10 +354,12 @@ class PacketSetting(QtGui.QWidget):
     def __init__(self, parent=None):
         super(PacketSetting, self).__init__(parent)
         self.stackRadioButton = QtGui.QRadioButton("Stack")
+        self.stackRadioButton.clicked.connect(self._sel_stack)
         self.wmbusRadioButton = QtGui.QRadioButton("WM-Bus")
         self.wmbusRadioButton.setEnabled(False)
         self.basicRadioButton = QtGui.QRadioButton("Basic")
         self.basicRadioButton.setChecked(True)
+        self.basicRadioButton.clicked.connect(self._sel_basic)
         
         packetFormatGroup = QtGui.QGroupBox("Packet Format")
         pfL = QtGui.QVBoxLayout(packetFormatGroup)
@@ -297,6 +381,16 @@ class PacketSetting(QtGui.QWidget):
         
         layout.addLayout(lsLayout)
         layout.addLayout(pfLayout)
+        
+        self._sel_basic()
+        
+    def _sel_basic(self):
+        self.stackPacketConfig.setVisible(False)
+        self.basicRadioConfig.setVisible(True)
+        
+    def _sel_stack(self):
+        self.stackPacketConfig.setVisible(True)
+        self.basicRadioConfig.setVisible(False)
         
 class STackPacketConfig(QtGui.QGroupBox):
     def __init__(self, title='STack Packet Config', parent=None):
@@ -404,10 +498,12 @@ class Window(QtGui.QMainWindow):
         self.serial.setCallback(self.status.parse_status)
         
         self.radioSetting = RadioSetting()
+        self.AES = AES(self.serial)
         
         commandTabWidget = QtGui.QTabWidget()
         commandTabWidget.addTab(packetConfigTab, "Packet Setting")
         commandTabWidget.addTab(lowLevelCommandTab, "Low Level Command")
+        commandTabWidget.addTab(self.AES, "AES")
         
         widget = QtGui.QWidget()
         layout = QtGui.QVBoxLayout(widget)

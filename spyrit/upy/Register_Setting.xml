@@ -47,7 +47,7 @@
     </Register>
   <Register>
     <Address>0x0B</Address>
-    <Value>0xBB</Value>
+    <Value>0xAB</Value>
     </Register>
   <Register>
     <Address>0x0C</Address>
@@ -103,11 +103,11 @@
       </Register>
     <Register>
       <Address>0x1A</Address>
-      <Value>0x93</Value>
+      <Value>0x06</Value>
       </Register>
     <Register>
       <Address>0x1B</Address>
-      <Value>0x1A</Value>
+      <Value>0x0C</Value>
       </Register>
     <Register>
       <Address>0x1C</Address>
@@ -175,7 +175,7 @@
       </Register>
     <Register>
       <Address>0x33</Address>
-      <Value>0x30</Value>
+      <Value>0x20</Value>
       </Register>
     <Register>
       <Address>0x34</Address>
