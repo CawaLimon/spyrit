@@ -1894,10 +1894,6 @@ F 3 "" H 17400 8850 50  0000 C CNN
 	1    17400 8850
 	-1   0    0    1   
 $EndComp
-Wire Wire Line
-	17600 8950 17600 9100
-Wire Wire Line
-	17600 9100 18450 9100
 Text Notes 16150 9050 0    59   ~ 0
 Connected to external\npower sources\n1 : Satellite power line\n2 : Battery
 Wire Wire Line
@@ -1905,9 +1901,17 @@ Wire Wire Line
 NoConn ~ 16100 5750
 NoConn ~ 16100 5850
 Wire Wire Line
-	17600 8850 18450 8850
-Wire Wire Line
-	18450 8850 18450 8800
-Wire Wire Line
 	17600 8750 17600 8400
+Wire Wire Line
+	18450 9100 18000 9100
+Wire Wire Line
+	18000 9100 18000 8850
+Wire Wire Line
+	18000 8850 17600 8850
+Wire Wire Line
+	18450 8800 18100 8800
+Wire Wire Line
+	18100 8800 18100 8950
+Wire Wire Line
+	18100 8950 17600 8950
 $EndSCHEMATC

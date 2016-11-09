@@ -1,4 +1,4 @@
-update=11/2/2016 2:32:49 PM
+update=11/9/2016 5:44:45 PM
 version=1
 last_client=kicad
 [pcbnew]
@@ -25,16 +25,6 @@ version=1
 NetIExt=net
 [general]
 version=1
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=
-SpiceForceRefPrefix=0
-SpiceUseNetNumbers=0
-LabSize=59
 [eeschema]
 version=1
 LibDir=../SOT_Packages_SMD
@@ -72,3 +62,13 @@ LibName30=valves
 LibName31=Oscillators
 LibName32=C:/Users/Derek Yu/Documents/FIRECODE/spyrit/kicad_schematic/spirit1
 LibName33=C:/Users/Derek Yu/Documents/FIRECODE/spyrit/kicad_schematic/tps22933
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=../../
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=59
